@@ -31,23 +31,29 @@ hbs.registerHelper('getDate', () => {
 });
 
 
-app.get('/', (request, response) =>{
+app.get('/', (request, response) => {
 response.render('home.hbs', {
 	pageTitle: "Home Page",
 	welcomeMessage:"Hello User, Welcome to Home Page"
 });
 });
 
-app.get('/about', (request, response) =>{
+app.get('/about', (request, response) => {
 response.render('about.hbs', {
 	pageTitle: 'About Page'
 });
 
 });
-app.get('/Error_page', (request, response)=>{
+app.get('/Error_page', (request, response) => {
 	response.send({
 		errorMessage: "This is Error Page"
 	})
+});
+
+app.get('/Projects', (request, response) => {
+	response.render('Projects.hbs', {
+		pageTitle:"Projects Page"
+	});
 });
 
 app.listen(port, () => {
