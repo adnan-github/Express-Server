@@ -2,12 +2,15 @@ const express 	= require('express');
 const hbs 		= require('hbs');
 const fs 		= require('fs');
 
-var app = express();
+const port	= process.env.PORT || 3100;
+var app 	= express();
 
+//--Setting Partials along with middleware directory// 
 hbs.registerPartials(__dirname + '/views/partials');
 app.set('view engine', 'hbs');
 app.use(express.static(__dirname + '/public'));
 
+//---MiddleWare for Testing//
 app.use((request, response, next) => {
 	var now = Date().toString();
 	var log = (`${now} . ${request.method}, ${request.url}`);
@@ -30,8 +33,8 @@ hbs.registerHelper('getDate', () => {
 
 app.get('/', (request, response) =>{
 response.render('home.hbs', {
-	"pageTitle": "Home Page",
-	"welcomeMessage":"Hello User, Welcome to Home Page"
+	pageTitle: "Home Page",
+	welcomeMessage:"Hello User, Welcome to Home Page"
 });
 });
 
@@ -47,4 +50,6 @@ app.get('/Error_page', (request, response)=>{
 	})
 });
 
-app.listen(3100);
+app.listen(port, () => {
+	console.log(`Server is listening at ${port}`);
+});
